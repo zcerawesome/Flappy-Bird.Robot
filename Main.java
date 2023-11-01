@@ -23,7 +23,6 @@ public class Main {
     int x = 0;
     int y = 25;
     int blockade = 74;
-    String s1;
     double totalScore = 0;
     //Start();
     int Middle = (int) Math.random() * 20 + 3;
@@ -46,8 +45,8 @@ public class Main {
             pw.close();
         }catch (Exception e){}
         //Calls players constructor, and changes position of blockade aferwards
-        s1 = "" + totalScore;
-        System.out.println("\t\t\tScore: " + s1.substring(0, 3));
+        System.out.printf("\t\t\tScore: %,.2f", totalScore);
+        System.out.println();
         Player playa = new Player();
         
         System.out.println("-----------------------------------------------------------------------------------------------------");
@@ -90,8 +89,7 @@ public class Main {
         System.out.print("You have died ");
         try{
             Thread.sleep(1000);
-            s1 = "" + totalScore;
-            System.out.print("your total score is " + s1.substring(0, 3));
+            System.out.printf("your total score is %,.2f", totalScore);
             System.exit(2);
         } catch(Exception j){System.exit(0);}
       }
