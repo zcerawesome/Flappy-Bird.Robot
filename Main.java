@@ -1,14 +1,17 @@
 import java.io.File;
 import java.util.Scanner;
 import java.io.PrintWriter;
+
+import java.awt.*;
+import java.awt.event.*;
+
 public class Main {
   static  KeyboardReader reader = new KeyboardReader();
   static PrintWriter pw;
-
+  static Scanner sc;
   static int hz = 62;
 
-  public static void main(String[] args) {
-
+  public static void main(String[] args) throws AWTException{
     boolean play = true;
     File obj = new File("Gravatus.txt");
     throwAway(obj);
@@ -23,11 +26,11 @@ public class Main {
     String s1;
     double totalScore = 0;
     //Start();
-    int Middle = (int) Math.random() * 21 + 2;
+    int Middle = (int) Math.random() * 20 + 3;
       try{
         while(play){
         if(blockade == 73){
-            Middle = (int) (Math.random() * 21) + 3;
+            Middle = (int) (Math.random() * 20) + 3;
         } else if(blockade == 8){
             blockade = 74;
         }
@@ -46,6 +49,7 @@ public class Main {
         s1 = "" + totalScore;
         System.out.println("\t\t\tScore: " + s1.substring(0, 3));
         Player playa = new Player();
+        
         System.out.println("-----------------------------------------------------------------------------------------------------");
         playa.MainIdea(x, y, force, blockade, Middle);
         System.out.println("-----------------------------------------------------------------------------------------------------");
@@ -53,7 +57,23 @@ public class Main {
         flapping flaps = new flapping();
         flaps.start();
         try{
+          File f = new File("Position.txt");
+          sc = new Scanner(f);
+          Robot r = new Robot();
+          Scanner Velocity = new Scanner(obj);
+          //Finds the calculated new position per frame, and measuers if going forward will cause it to hit the floor
+          int expectedPosition = 0;
+          int position = Integer.parseInt(sc.nextLine());
+          expectedPosition = Integer.parseInt(Velocity.nextLine()) + position;
+          Velocity.close();
+          if(expectedPosition > 25){
+            r.keyPress(KeyEvent.VK_ENTER);
+          } else if(position >= Middle+2){
+            r.keyPress(KeyEvent.VK_ENTER);
+          }
+          
           Thread.sleep(hz);
+          r.keyRelease(KeyEvent.VK_ENTER);
           blockade--;
           flaps.interrupt();
         } catch(Exception e){}
@@ -72,8 +92,8 @@ public class Main {
             Thread.sleep(1000);
             s1 = "" + totalScore;
             System.out.print("your total score is " + s1.substring(0, 3));
-        } catch(Exception j){}
-        System.exit(0);
+            System.exit(2);
+        } catch(Exception j){System.exit(0);}
       }
 
   }
