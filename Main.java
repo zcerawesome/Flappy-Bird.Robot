@@ -45,7 +45,7 @@ public class Main {
             pw.close();
         }catch (Exception e){}
         //Calls players constructor, and changes position of blockade aferwards
-        System.out.printf("\t\t\tScore: %,.2f", totalScore);
+        System.out.printf("\t\t\tRoberto's Score: %,.2f", totalScore);
         System.out.println();
         Player playa = new Player();
         
@@ -58,7 +58,7 @@ public class Main {
         try{
           File f = new File("Position.txt");
           sc = new Scanner(f);
-          Robot r = new Robot();
+          Robot roberto = new Robot();
           Scanner Velocity = new Scanner(obj);
           //Finds the calculated new position per frame, and measuers if going forward will cause it to hit the floor
           int expectedPosition = 0;
@@ -66,13 +66,13 @@ public class Main {
           expectedPosition = Integer.parseInt(Velocity.nextLine()) + position;
           Velocity.close();
           if(expectedPosition > 25){
-            r.keyPress(KeyEvent.VK_ENTER);
+            roberto.keyPress(KeyEvent.VK_ENTER);
           } else if(position >= Middle+2){
-            r.keyPress(KeyEvent.VK_ENTER);
+            roberto.keyPress(KeyEvent.VK_ENTER);
           }
           
           Thread.sleep(hz);
-          r.keyRelease(KeyEvent.VK_ENTER);
+          roberto.keyRelease(KeyEvent.VK_ENTER);
           blockade--;
           flaps.interrupt();
         } catch(Exception e){}
